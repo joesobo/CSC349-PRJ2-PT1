@@ -22,8 +22,8 @@ public class main{
         //matrix multiplication
         for(int i = 0; i < n; i++){ //loop through A row
             for(int j = 0; j < m; j++){ //loop through B col
-                for(int l = 1; l < k; l++){ //loop through A & B k value (col & row)
-                    C[i][j] = A[i][l] * B[l][j];
+                for(int l = 0; l < k; l++){ //loop through A & B k value (col & row)
+                    C[i][j] += A[i][l] * B[l][j];
                 }
             }
         }
@@ -52,9 +52,11 @@ public class main{
             textReader = new BufferedReader(new FileReader(file));
             String text;
             while((text = textReader.readLine()) != null){
-                String[] items = text.split(" ");
+                String[] items = text.split("\\s+");
                 for (int i = 0; i < items.length; i++) {
-                    list.add(Integer.parseInt(items[i]));
+                    if(!items[i].equals("")){
+                        list.add(Integer.parseInt(items[i]));
+                    }
                 }
             }
         } catch (FileNotFoundException e){
@@ -91,11 +93,22 @@ public class main{
         }
 
         //matrixProduct
-        //TODO: Add handing for IllegalArgumentException
+        //TODO: Add handing for IllegalArgumentException DONE
+        int[][] c;
+
+        try{
+            c = matrixProduct(A, B);
+        }
+        //catch argument and close program
+        catch(IllegalArgumentException ex){
+            System.out.println("Illegal Argument Exception has occured");
+            inputReader.close();
+            return;
+        }
         int[][] C = matrixProduct(A, B);
 
         //printout
-        System.out.println("Product matrix:");
+        System.out.println("\nProduct matrix:");
         for(int i = 0; i < C.length; i++){
             for(int j = 0; j < C[0].length; j++){
                 System.out.print(C[i][j] + " ");
