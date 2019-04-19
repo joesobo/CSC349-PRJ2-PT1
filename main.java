@@ -93,7 +93,6 @@ public class main{
         }
 
         //matrixProduct
-        //TODO: Add handing for IllegalArgumentException DONE
         int[][] c;
 
         try{
@@ -101,7 +100,7 @@ public class main{
         }
         //catch argument and close program
         catch(IllegalArgumentException ex){
-            System.out.println("Illegal Argument Exception has occured");
+            System.out.println("Matrixes were incorrect sizetest7");
             inputReader.close();
             return;
         }
